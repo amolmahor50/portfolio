@@ -140,24 +140,15 @@ const Footer = () => {
 
             </PageLayout>
 
-            {/* COPYRIGHT & LEGAL LINKS (QuirGO Style Bottom) */}
+            {/* COPYRIGHT BOTTOM */}
             <PageLayout>
-                <div className="pt-8 border-t border-gray-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-sm md:text-base text-gray-500">
+                <div className="pt-8 border-t border-gray-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500 text-center sm:text-left">
                     <p>
                         © {new Date().getFullYear()} Amol Mahor. All rights reserved.
                     </p>
-
-                    <div className="flex items-center space-x-6">
-                        <Link to="/" className="hover:text-gray-900 transition-colors">
-                            Privacy Policy
-                        </Link>
-                        <Link to="/" className="hover:text-gray-900 transition-colors">
-                            Terms &amp; Conditions
-                        </Link>
-                        <Link to="/" className="hover:text-gray-900 transition-colors">
-                            Cookie Policy
-                        </Link>
-                    </div>
+                    <p className="text-xs text-gray-400">
+                        Built with React.js, Node.js &amp; Tailwind CSS
+                    </p>
                 </div>
             </PageLayout>
 

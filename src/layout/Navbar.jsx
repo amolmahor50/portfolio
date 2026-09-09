@@ -91,7 +91,7 @@ const Navbar = () => {
                             to={link.path}
                             onClick={() => setIsOpen(false)}
                             className={({ isActive }) =>
-                                `flex items-center justify-between border-b border-gray-100 pb-3 text-sm transition-all duration-300 ${isActive ? 'text-primary' : 'text-muted-foreground hover:bg-muted'
+                                `flex items-center justify-between border-b border-gray-100 pb-3 text-base transition-all duration-300 ${isActive ? 'text-primary' : 'text-muted-foreground hover:bg-muted'
                                 }`
                             }
                         >
