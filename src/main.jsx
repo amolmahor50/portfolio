@@ -9,11 +9,11 @@ import ScrollToTop from "@/components/shared/ScrollToTop";
 import ScrollToTopButton from "@/components/shared/ScrollToTopButton";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <ScrollToTop />
-      <ScrollToTopButton />
-      <App />
-    </BrowserRouter>
-  </StrictMode>
+    <StrictMode>
+        <BrowserRouter>
+            <ScrollToTop />
+            <ScrollToTopButton />
+            <App />
+        </BrowserRouter>
+    </StrictMode>
 );

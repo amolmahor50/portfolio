@@ -12,18 +12,18 @@ const Services = lazy(() => import("./pages/Services"));
 const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="projects" element={<Projects />} />
-        <Route path="skills" element={<Skills />} />
-        <Route path="services" element={<Services />} />
-        <Route path="contact" element={<Contact />} />
-      </Route>
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="about" element={<About />} />
+                <Route path="projects" element={<Projects />} />
+                <Route path="skills" element={<Skills />} />
+                <Route path="services" element={<Services />} />
+                <Route path="contact" element={<Contact />} />
+            </Route>
+        </Routes>
+    );
 }
 
 export default App;
