@@ -38,7 +38,7 @@ const Home = () => {
   const featuredTestimonials = testimonialsData.slice(0, 3);
 
   return (
-    <div className="space-y-20 md:space-y-32">
+    <div className="space-y-16 md:space-y-32">
       {/* HERO SECTION */}
       <HeroSection />
 
@@ -164,7 +164,7 @@ const Home = () => {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-sm font-medium text-primary">
+                <div className="flex items-center justify-between text-sm font-medium text-primary">
                   <span>Learn Deliverables</span>
                   <ArrowRight
                     size={16}

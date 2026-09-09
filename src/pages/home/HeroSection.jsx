@@ -12,7 +12,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative flex items-center overflow-hidden w-full md:py-20">
+    <section className="relative flex items-center overflow-hidden w-full py-4 md:py-20">
       {/* AMBIENT BACKGROUND GLOW */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-112.5 bg-linear-to-b from-primary/20 via-secondary/10 to-transparent blur-[120px] rounded-full" />
