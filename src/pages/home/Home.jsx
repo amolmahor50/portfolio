@@ -114,7 +114,7 @@ const Home = () => {
                             I build platforms that scale effortlessly and deliver exceptional user experiences.
                         </h3>
 
-                        <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+                        <p className="text-gray-600 text-base leading-relaxed">
                             Currently at <strong className="text-gray-900">Strelema</strong>, I engineer mission-critical admin platforms like <strong className="text-gray-900">SuperLeader</strong>, enterprise HRMS systems, and data-driven polling engines like <strong className="text-gray-900">PollPandit</strong>. With a strong background in React.js, Node.js, PostgreSQL, and Socket.io, I architect scalable backends and pixel-perfect frontends built for speed and security.
                         </p>
 
@@ -125,7 +125,7 @@ const Home = () => {
                                 "Real-Time WebSockets & Live State Sync",
                                 "Core Web Vitals 90+ & SEO Architecture",
                             ].map((trait, tIdx) => (
-                                <div key={tIdx} className="flex items-start gap-2.5 text-xs md:text-sm font-medium text-gray-800">
+                                <div key={tIdx} className="flex items-start gap-2.5 text-sm font-medium text-gray-800">
                                     <CheckCircle2 size={18} className="text-primary shrink-0 mt-0.5" />
                                     <span>{trait}</span>
                                 </div>
@@ -133,20 +133,23 @@ const Home = () => {
                         </div>
 
                         <div className="flex flex-wrap items-center gap-4 pt-4">
-                            <Link
+                          <Button className="md:w-fit w-full" size="lg">
+                              <Link
                                 to="/about"
-                                className="btn-primary px-6 py-2.5 text-sm font-semibold rounded-none inline-flex items-center gap-2"
+                                className="flex items-center gap-3"
                             >
                                 <span>Read Full Bio &amp; Career Journey</span>
                                 <ArrowRight size={16} />
                             </Link>
+                          </Button>
 
-                            <Link
+                          <Button className="md:w-fit w-full" size="lg" variant="outline">
+                              <Link
                                 to="/skills"
-                                className="px-5 py-2.5 text-sm font-semibold border border-gray-300 bg-white text-gray-700 hover:border-primary/40 hover:text-primary transition-colors rounded-none inline-flex items-center gap-2"
                             >
                                 <span>Explore Tech Arsenal</span>
                             </Link>
+                          </Button>
                         </div>
                     </div>
                 </div>

@@ -49,12 +49,12 @@ const About = () => {
                             </span>
                         </h1>
 
-                        <p className="leading-relaxed text-sm md:text-base text-gray-600">
+                        <p className="leading-relaxed text-base text-gray-600">
                             I am a results-driven Full Stack Developer with 2+ years of production
                             experience engineering scalable web applications and enterprise platforms.
                             Currently at <strong className="text-gray-900 font-semibold">Strelema</strong>, I develop mission-critical platforms including <strong className="text-gray-900 font-semibold">SuperLeader</strong>, enterprise HRMS dashboards, and data-driven polling engines like <strong className="text-gray-900 font-semibold">PollPandit</strong>.
                         </p>
-                        <p className="leading-relaxed text-sm md:text-base text-gray-600">
+                        <p className="leading-relaxed text-base text-gray-600">
                             Specializing in React.js, Node.js, PostgreSQL, Express.js, and Socket.io, I architect resilient backends, implement granular role-based access control (RBAC), and deliver pixel-perfect user interfaces built for high performance and security.
                         </p>
 
@@ -106,7 +106,7 @@ const About = () => {
                                         <Briefcase size={14} />
                                         {exp.period}
                                     </span>
-                                    <span className="text-sm md:text-base text-gray-400 tracking-widest">
+                                    <span className="text-base text-gray-400 tracking-widest">
                                         Role #{i + 1}
                                     </span>
                                 </div>
@@ -119,7 +119,7 @@ const About = () => {
                                     <span>{exp.company}</span>
                                 </p>
 
-                                <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-3xl">
+                                <p className="text-gray-500 text-base leading-relaxed max-w-3xl">
                                     {exp.desc}
                                 </p>
                             </div>
@@ -233,7 +233,7 @@ const About = () => {
                                         </h3>
                                     </div>
 
-                                    <p className="text-sm md:text-base text-gray-500 pt-2 border-t border-gray-100">
+                                    <p className="text-base text-gray-500 pt-2 border-t border-gray-100">
                                         {edu.institute}
                                     </p>
                                 </div>
@@ -275,7 +275,7 @@ const About = () => {
                                         </h3>
                                     </div>
 
-                                    <p className="text-sm md:text-base text-gray-500 pt-2 border-t border-gray-100">
+                                    <p className="text-base text-gray-500 pt-2 border-t border-gray-100">
                                         {cert.org}
                                     </p>
                                 </div>

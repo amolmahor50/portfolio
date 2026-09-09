@@ -48,7 +48,7 @@ const Headline = ({
 
                 {/* Subtitle */}
                 {subtitle && (
-                    <p className={`leading-relaxed text-muted-foreground text-sm md:text-base lg:text-lg max-w-2xl mt-2 ${mx}`}>
+                    <p className={`leading-relaxed text-muted-foreground text-base lg:text-lg max-w-2xl mt-2 ${mx}`}>
                         {subtitle}
                     </p>
                 )}

@@ -31,14 +31,14 @@ const Projects = () => {
                                 <h3 className="md:text-xl text-lg font-semibold tracking-tight mb-2 text-foreground group-hover:text-primary transition-colors">
                                     {project.title}
                                 </h3>
-                                <p className="text-gray-500 text-sm md:text-base line-clamp-3 mb-5">
+                                <p className="text-gray-500 text-base line-clamp-3 mb-5">
                                     {project.description}
                                 </p>
 
                                 <div className="flex justify-between items-center border-t border-border/50 pt-2">
                                     <Link
                                         to={`/projects/${project.id}`}
-                                        className="inline-flex items-center text-sm md:text-base text-primary group-hover:underline"
+                                        className="inline-flex items-center text-base text-primary group-hover:underline"
                                     >
                                         Case Study <MoveRight className="ml-2 h-4 w-4" />
                                     </Link>

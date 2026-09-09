@@ -24,25 +24,27 @@ const Footer = () => {
 
             {/* QuirGO CTA BANNER ABOVE FOOTER */}
             <div className="max-w-6xl mx-auto mb-16 p-8 md:p-12 rounded-none bg-linear-to-r from-primary via-secondary to-accent text-white text-center shadow-xl shadow-primary/20 space-y-6">
-                <h3 className="text-2xl md:text-4xl font-extrabold tracking-tight max-w-2xl mx-auto leading-tight">
+                <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight max-w-2xl mx-auto leading-tight">
                     Ready to build your next digital product?
                 </h3>
-                <p className="text-white/90 text-sm md:text-base max-w-xl mx-auto font-medium">
+                <p className="text-white/90 text-base max-w-xl mx-auto font-medium">
                     Let's collaborate to bring your ideas to life with modern architecture, high performance, and exceptional UI/UX.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-                    <Link
+                <Button size="lg" variant="outline">
+                        <Link
                         to="/contact"
-                        className="px-6 py-2 bg-white text-primary font-medium text-sm md:text-base rounded-none shadow-[0_8px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300"
                     >
                         Start a Project
                     </Link>
-                    <Link
+                </Button>
+                <Button size="lg" variant="outline">
+                        <Link
                         to="/projects"
-                        className="px-6 py-2 bg-transparent border-2 border-white/30 text-white font-medium text-sm md:text-base rounded-none hover:bg-white/10 hover:border-white/50 transition-all duration-300"
                     >
                         Explore Works
                     </Link>
+                </Button>
                 </div>
             </div>
 
@@ -60,7 +62,7 @@ const Footer = () => {
                         </span>
                     </Link>
 
-                    <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-xs">
+                    <p className="text-gray-500 text-base leading-relaxed max-w-xs">
                         Crafting high-performance web applications with modern architecture, clean code, and user-centric designs.
                     </p>
 
@@ -89,7 +91,7 @@ const Footer = () => {
                             <li key={item}>
                                 <Link
                                     to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                                    className="text-gray-500 font-normal hover:text-primary transition-colors text-sm md:text-base"
+                                    className="text-gray-500 font-normal hover:text-primary transition-colors text-base"
                                 >
                                     {item}
                                 </Link>
@@ -111,7 +113,7 @@ const Footer = () => {
                             "Performance Optimization",
                             "SEO Best Practices",
                         ].map((item) => (
-                            <li key={item} className="text-gray-500 font-normal text-sm md:text-base">
+                            <li key={item} className="text-gray-500 font-normal text-base">
                                 {item}
                             </li>
                         ))}
@@ -123,14 +125,14 @@ const Footer = () => {
                     <h4 className="text-base md:text-lg font-bold text-gray-900 mb-5 tracking-tight">
                         Stay Connected
                     </h4>
-                    <p className="text-gray-500 text-sm md:text-base">
+                    <p className="text-gray-500 text-base">
                         Subscribe to get notified about new projects and development articles.
                     </p>
                     <form className="flex flex-col space-y-3" onSubmit={(e) => e.preventDefault()}>
                         <input
                             type="email"
                             placeholder="Enter your email"
-                            className="px-4 py-2 bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm md:text-base transition-all outline-none"
+                            className="px-4 py-2 bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-primary/20 focus:border-primary text-base transition-all outline-none"
                         />
                         <Button>
                             Subscribe

@@ -93,12 +93,12 @@ const Services = () => {
                                         <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-2">
                                             {service.title}
                                         </h2>
-                                        <p className="text-sm md:text-base font-medium text-primary">
+                                        <p className="text-base font-medium text-primary">
                                             {service.tagline}
                                         </p>
                                     </div>
 
-                                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                                    <p className="text-muted-foreground text-base leading-relaxed">
                                         {service.description}
                                     </p>
 
@@ -110,7 +110,7 @@ const Services = () => {
                                             {service.features.map((feature, i) => (
                                                 <li
                                                     key={i}
-                                                    className="flex items-start gap-3 text-sm md:text-base font-medium text-gray-700"
+                                                    className="flex items-start gap-3 text-base font-medium text-gray-700"
                                                 >
                                                     <CheckCircle2
                                                         size={18}
@@ -208,7 +208,7 @@ const Services = () => {
                             Delivery Workflow
                         </h2>
 
-                        <p className="text-muted-foreground text-sm md:text-base max-w-xl mx-auto mt-3">
+                        <p className="text-muted-foreground text-base max-w-xl mx-auto mt-3">
                             A transparent, iterative process ensuring alignment, speed, and
                             uncompromising quality.
                         </p>
@@ -250,7 +250,7 @@ const Services = () => {
                                         {step.title}
                                     </h4>
 
-                                    <p className="text-muted-foreground text-sm md:text-base">
+                                    <p className="text-muted-foreground text-base">
                                         {step.desc}
                                     </p>
 
