@@ -1,15 +1,15 @@
-import React, { lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { lazy } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import MainLayout from './layout/MainLayout';
+import MainLayout from "./layout/MainLayout";
 
 // Lazy load pages for performance
-const Home = lazy(() => import('./pages/home/Home'));
-const About = lazy(() => import('./pages/About'));
-const Projects = lazy(() => import('./pages/Projects'));
-const Skills = lazy(() => import('./pages/Skills'));
-const Services = lazy(() => import('./pages/Services'));
-const Contact = lazy(() => import('./pages/Contact'));
+const Home = lazy(() => import("./pages/home/Home"));
+const About = lazy(() => import("./pages/About"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Services = lazy(() => import("./pages/Services"));
+const Contact = lazy(() => import("./pages/Contact"));
 
 function App() {
   return (
