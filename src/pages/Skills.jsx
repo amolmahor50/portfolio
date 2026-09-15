@@ -241,12 +241,12 @@ const Skills = () => {
                         Whether you need an enterprise admin panel, custom full-stack application,
                         or real-time feature, let's discuss your requirements.
                     </p>
-                    <Button asChild size="lg" className="mt-2 md:w-fit w-full">
-                        <Link to="/contact">
+                    <Link to="/contact">
+                        <Button asChild size="lg" className="mt-2 md:w-fit w-full">
                             <span>Discuss Your Project</span>
                             <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 </div>
             </section>
         </div>
