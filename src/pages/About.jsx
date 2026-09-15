@@ -15,16 +15,31 @@ import {
 } from "lucide-react";
 
 import Headline from "@/components/shared/Headline";
-
-import {
-    experiencesData,
-    educationData,
-    certificationsData,
-    aboutTraits,
-    servicesData,
-} from "@/utils/data";
+import { useExperiences } from "@/hooks/useExperiences";
+import { useEducation } from "@/hooks/useEducation";
+import { useCertifications } from "@/hooks/useCertifications";
+import { useServices } from "@/hooks/useServices";
+import { getLucideIcon } from "@/utils/iconResolver";
 
 const About = () => {
+    const { experiences, loading: expLoading } = useExperiences();
+    const { education, loading: eduLoading } = useEducation();
+    const { certifications, loading: certLoading } = useCertifications();
+    const { services, loading: servLoading } = useServices();
+
+    // Derived dynamically from live Firestore services
+    const traits = React.useMemo(() => {
+        if (services && services.length > 0) {
+            return services.slice(0, 4).map((s) => s.badge || s.title);
+        }
+        return [
+            "Full-Stack Architecture",
+            "UI/UX Engineering",
+            "Performance Optimization",
+            "Scalable Systems",
+        ];
+    }, [services]);
+
     return (
         <div>
             <div className="md:pt-10 space-y-10 md:space-y-32">
@@ -56,7 +71,7 @@ const About = () => {
                         </p>
 
                         <div className="pt-6 grid grid-cols-2 gap-4">
-                            {aboutTraits.map((item) => (
+                            {traits.map((item) => (
                                 <div
                                     key={item}
                                     className="flex items-center space-x-2 text-foreground font-medium"
@@ -88,40 +103,69 @@ const About = () => {
 
                     {/* Professional Journey Timeline */}
                     <div className="relative border-l-2 border-primary/20 md:ml-8 mt-6 md:mt-10 space-y-10 md:space-y-12 pb-8">
-                        {experiencesData.map((exp, i) => (
-                            <div key={i} className="relative pl-6 md:pl-12 group">
-                                {/* Node Marker */}
-                                <span className="absolute -left-2.25 top-6 w-4 h-4 bg-white border-2 border-primary shadow-[0_0_12px_rgba(124,110,230,0.6)] rotate-45 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:bg-primary" />
-
-                                {/* Card Content */}
-                                <div className="bg-white border border-gray-200/90 rounded-none p-6 md:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 relative overflow-hidden">
-                                    {/* Top Accent Glow Line */}
-                                    <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                                    <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                                        <span className="px-3.5 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase rounded-none inline-flex items-center gap-1.5">
-                                            <Briefcase size={14} />
-                                            {exp.period}
-                                        </span>
-                                        <span className="text-base text-gray-400 tracking-widest">
-                                            Role #{i + 1}
-                                        </span>
+                        {expLoading && (
+                            <div className="pl-6 md:pl-12 space-y-6">
+                                {[1, 2].map((i) => (
+                                    <div
+                                        key={i}
+                                        className="bg-white border border-gray-200/90 p-6 md:p-8 animate-pulse space-y-4"
+                                    >
+                                        <div className="h-4 bg-gray-200 w-32 rounded-xs" />
+                                        <div className="h-6 bg-gray-200 w-1/2 rounded-xs" />
+                                        <div className="h-4 bg-gray-100 w-full rounded-xs" />
                                     </div>
-
-                                    <h3 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 group-hover:text-primary transition-colors mb-1">
-                                        {exp.role}
-                                    </h3>
-
-                                    <p className="text-base font-semibold text-primary mb-4 flex items-center gap-1.5">
-                                        <span>{exp.company}</span>
-                                    </p>
-
-                                    <p className="text-gray-500 text-base leading-relaxed max-w-3xl">
-                                        {exp.desc}
-                                    </p>
-                                </div>
+                                ))}
                             </div>
-                        ))}
+                        )}
+
+                        {!expLoading &&
+                            experiences.map((exp, i) => (
+                                <div key={exp.id || i} className="relative pl-6 md:pl-12 group">
+                                    {/* Node Marker */}
+                                    <span className="absolute -left-2.25 top-6 w-4 h-4 bg-white border-2 border-primary shadow-[0_0_12px_rgba(124,110,230,0.6)] rotate-45 z-10 transition-transform duration-300 group-hover:scale-125 group-hover:bg-primary" />
+
+                                    {/* Card Content */}
+                                    <div className="bg-white border border-gray-200/90 rounded-none p-6 md:p-8 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 relative overflow-hidden">
+                                        {/* Top Accent Glow Line */}
+                                        <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                            <span className="px-3.5 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase rounded-none inline-flex items-center gap-1.5">
+                                                <Briefcase size={14} />
+                                                {exp.period}
+                                            </span>
+                                            <span className="text-base text-gray-400 tracking-widest">
+                                                Role #{i + 1}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 group-hover:text-primary transition-colors mb-1">
+                                            {exp.role}
+                                        </h3>
+
+                                        <p className="text-base font-semibold text-primary mb-4 flex items-center gap-1.5">
+                                            <span>{exp.company}</span>
+                                        </p>
+
+                                        <p className="text-gray-500 text-base leading-relaxed max-w-3xl">
+                                            {exp.desc}
+                                        </p>
+
+                                        {exp.tags && exp.tags.length > 0 && (
+                                            <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-gray-100">
+                                                {exp.tags.map((tag, tIdx) => (
+                                                    <span
+                                                        key={tIdx}
+                                                        className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 font-medium"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
                     </div>
                 </section>
 
@@ -136,56 +180,65 @@ const About = () => {
                     />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {servicesData.map((service) => {
-                            const icons = {
-                                Rocket,
-                                LayoutDashboard,
-                                Palette,
-                                Server,
-                                Radio,
-                                Gauge,
-                            };
-                            const Icon = icons[service.icon] || Rocket;
-                            return (
-                                <Link
-                                    key={service.id}
-                                    to={`/services#${service.id}`}
-                                    className="bg-white border border-gray-200/90 rounded-none p-6 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 group relative overflow-hidden flex flex-col justify-between space-y-4 block"
+                        {servLoading &&
+                            [1, 2, 3].map((i) => (
+                                <div
+                                    key={i}
+                                    className="bg-white border border-gray-200/90 p-6 animate-pulse space-y-3"
                                 >
-                                    <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <div className="h-8 bg-gray-200 w-8 rounded-xs" />
+                                    <div className="h-6 bg-gray-200 w-3/4 rounded-xs" />
+                                    <div className="h-4 bg-gray-100 w-full rounded-xs" />
+                                </div>
+                            ))}
 
-                                    <div className="space-y-3">
-                                        <div className="p-2.5 w-fit bg-primary/10 border border-primary/20 text-primary rounded-none">
-                                            <Icon size={22} />
+                        {!servLoading &&
+                            services.map((service) => {
+                                const Icon = getLucideIcon(service.icon, Rocket);
+                                return (
+                                    <Link
+                                        key={service.id}
+                                        to={`/services#${service.id}`}
+                                        className="bg-white border border-gray-200/90 rounded-none p-6 shadow-xs hover:shadow-xl hover:border-primary/40 transition-all duration-300 group relative overflow-hidden flex flex-col justify-between space-y-4 block"
+                                    >
+                                        <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                        <div className="space-y-3">
+                                            <div className="p-2.5 w-fit bg-primary/10 border border-primary/20 text-primary rounded-none">
+                                                <Icon size={22} />
+                                            </div>
+
+                                            <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                                                {service.title}
+                                            </h3>
+
+                                            <p className="text-base text-gray-500 line-clamp-3 leading-relaxed">
+                                                {service.description}
+                                            </p>
                                         </div>
 
-                                        <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
-                                            {service.title}
-                                        </h3>
-
-                                        <p className="text-base text-gray-500 line-clamp-3 leading-relaxed">
-                                            {service.description}
-                                        </p>
-                                    </div>
-
-                                    <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-sm font-semibold text-primary">
-                                        <span>{service.techStack.slice(0, 3).join(" • ")}</span>
-                                        <ArrowRight
-                                            size={14}
-                                            className="group-hover:translate-x-1 transition-transform"
-                                        />
-                                    </div>
-                                </Link>
-                            );
-                        })}
+                                        {service.techStack && service.techStack.length > 0 && (
+                                            <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-sm font-semibold text-primary">
+                                                <span>
+                                                    {service.techStack.slice(0, 3).join(" • ")}
+                                                </span>
+                                                <ArrowRight
+                                                    size={14}
+                                                    className="group-hover:translate-x-1 transition-transform"
+                                                />
+                                            </div>
+                                        )}
+                                    </Link>
+                                );
+                            })}
                     </div>
 
                     <div className="flex justify-center pt-4">
                         <Link
                             to="/services"
-                            className="btn-primary px-6 py-2.5 text-sm font-semibold rounded-none inline-flex items-center gap-2"
+                            className="bg-primary text-white hover:bg-primary/90 px-6 py-2.5 text-sm font-semibold rounded-none inline-flex items-center gap-2 transition-colors"
                         >
-                            <span>Explore All Services & Deliverables</span>
+                            <span>Explore All Services &amp; Deliverables</span>
                             <ArrowRight size={16} />
                         </Link>
                     </div>
@@ -205,33 +258,48 @@ const About = () => {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                            {educationData.map((edu, i) => (
-                                <div
-                                    key={i}
-                                    className="bg-white border border-gray-200/90 rounded-none p-6 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-300 group relative overflow-hidden flex flex-col justify-between space-y-4"
-                                >
-                                    <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            {eduLoading &&
+                                [1, 2, 3].map((i) => (
+                                    <div
+                                        key={i}
+                                        className="bg-white border border-gray-200/90 p-6 animate-pulse space-y-4"
+                                    >
+                                        <div className="h-4 bg-gray-200 w-24 rounded-xs" />
+                                        <div className="h-5 bg-gray-200 w-3/4 rounded-xs" />
+                                        <div className="h-4 bg-gray-100 w-1/2 rounded-xs" />
+                                    </div>
+                                ))}
 
-                                    <div className="space-y-3">
-                                        <div className="flex items-center justify-between gap-2">
-                                            <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase rounded-none">
-                                                {edu.year}
-                                            </span>
-                                            <span className="text-xs font-bold text-gray-700 px-2 py-0.5 bg-gray-100 border border-gray-200 rounded-none">
-                                                Grade: {edu.percentage}
-                                            </span>
+                            {!eduLoading &&
+                                education.map((edu, i) => (
+                                    <div
+                                        key={edu.id || i}
+                                        className="bg-white border border-gray-200/90 rounded-none p-6 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-300 group relative overflow-hidden flex flex-col justify-between space-y-4"
+                                    >
+                                        <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase rounded-none">
+                                                    {edu.year}
+                                                </span>
+                                                {edu.percentage && (
+                                                    <span className="text-xs font-bold text-gray-700 px-2 py-0.5 bg-gray-100 border border-gray-200 rounded-none">
+                                                        Grade: {edu.percentage}
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                                                {edu.degree}
+                                            </h3>
                                         </div>
 
-                                        <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
-                                            {edu.degree}
-                                        </h3>
+                                        <p className="text-base text-gray-500 pt-2 border-t border-gray-100">
+                                            {edu.institute}
+                                        </p>
                                     </div>
-
-                                    <p className="text-base text-gray-500 pt-2 border-t border-gray-100">
-                                        {edu.institute}
-                                    </p>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     </div>
 
@@ -247,33 +315,56 @@ const About = () => {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                            {certificationsData.map((cert, i) => (
-                                <div
-                                    key={i}
-                                    className="bg-white border border-gray-200/90 rounded-none p-6 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-300 group relative overflow-hidden flex flex-col justify-between space-y-4"
-                                >
-                                    <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            {certLoading &&
+                                [1, 2, 3].map((i) => (
+                                    <div
+                                        key={i}
+                                        className="bg-white border border-gray-200/90 p-6 animate-pulse space-y-4"
+                                    >
+                                        <div className="h-4 bg-gray-200 w-24 rounded-xs" />
+                                        <div className="h-5 bg-gray-200 w-3/4 rounded-xs" />
+                                        <div className="h-4 bg-gray-100 w-1/2 rounded-xs" />
+                                    </div>
+                                ))}
 
-                                    <div className="space-y-3">
-                                        <div className="flex items-center justify-between gap-2">
-                                            <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase rounded-none">
-                                                {cert.year}
-                                            </span>
-                                            <span className="text-xs font-bold text-emerald-700 px-2 py-0.5 bg-emerald-50 border border-emerald-200 rounded-none">
-                                                Verified
-                                            </span>
+                            {!certLoading &&
+                                certifications.map((cert, i) => (
+                                    <div
+                                        key={cert.id || i}
+                                        className="bg-white border border-gray-200/90 rounded-none p-6 shadow-xs hover:shadow-lg hover:border-primary/40 transition-all duration-300 group relative overflow-hidden flex flex-col justify-between space-y-4"
+                                    >
+                                        <div className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between gap-2">
+                                                <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase rounded-none">
+                                                    {cert.year}
+                                                </span>
+                                                <span className="text-xs font-bold text-emerald-700 px-2 py-0.5 bg-emerald-50 border border-emerald-200 rounded-none">
+                                                    Verified
+                                                </span>
+                                            </div>
+
+                                            <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
+                                                {cert.title}
+                                            </h3>
                                         </div>
 
-                                        <h3 className="text-base md:text-lg font-bold text-gray-900 group-hover:text-primary transition-colors">
-                                            {cert.title}
-                                        </h3>
+                                        <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                                            <p className="text-base text-gray-500">{cert.org}</p>
+                                            {cert.credentialUrl && (
+                                                <a
+                                                    href={cert.credentialUrl}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="text-xs font-semibold text-primary hover:underline"
+                                                >
+                                                    View Credential
+                                                </a>
+                                            )}
+                                        </div>
                                     </div>
-
-                                    <p className="text-base text-gray-500 pt-2 border-t border-gray-100">
-                                        {cert.org}
-                                    </p>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     </div>
                 </div>
